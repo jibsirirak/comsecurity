@@ -1,0 +1,140 @@
+.head  {
+    display: flex;
+    margin: 0;
+    width: 100%;
+    height: 120px;
+    background-color: #003566;
+    align-items: center;
+}
+.h1  {
+    margin:0;
+    margin-left: 40px;
+    color:#FFC300;
+    font-size: 64px;
+    font-weight:900;
+}
+.mid  {
+    display: flex;
+    flex-direction:row;
+    margin-top: 4%;
+    width:100%;
+    height:600px;
+    align-items: center;
+    justify-content: center;
+    /* background-color:green; */
+
+}
+.space  {
+    width:20%;
+    height:100%;
+    align-items: center;
+    justify-items:center;
+    /* background-color:yellow; */
+    
+}
+.right  {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    height:100%;
+    /* background-color:rgb(29, 180, 130); */
+   
+    
+}
+.forget  {
+    margin: 0px;
+    width: 100%;
+    height: 80px;
+    margin-top: 2%;
+    /* background-color: pink; */
+
+}
+.p_forget {
+    margin:0;
+    color:#003566;
+    font-size:64px;
+    text-align:center;
+    font-weight:900;
+    
+}
+.password  {
+    margin: 0px;
+    width: 45%;
+    height: 50px;
+    /* background-color: red; */
+
+}
+.p_password {
+    margin:0;
+    color:#003566;
+    font-size:36px;
+    text-align:center;
+    font-weight:900;
+    
+}
+.box_password  {
+    display: flex;
+    width:70%;
+    height:120px;
+    margin-left: 5.5%;
+    margin-bottom: 2%;
+    justify-content: center;
+    /* background-color:rgb(230, 75, 75); */
+}
+.ip_password  {
+    background-color:#FFC300;
+    margin-top:15px;
+    border-radius:20px;
+    width:761px;
+    height:74px;
+    border-width: 0px;
+    color: #384BF5;
+    font-size: 36px;
+    font-weight:900;
+
+}
+.d_signin_btn  {
+    display: flex;
+    margin-top: 3%;
+    width:220px;
+    height:80px;
+    margin-left: 33%;
+    align-items: center;
+    justify-content: center;
+    /* background-color:pink; */
+}
+.signin_btn  {
+    display: flex;
+    color: #FFCC15;
+    font-size:24px;
+    text-align:center;
+    font-weight:900;
+    background-color: #003566;
+    width:210px;
+    height:80px;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+.bottom  {
+    display: flex;
+    width:40%;
+    height:80px;
+    margin-left: 30%;
+    align-items: center;
+    justify-content: center;
+    /* background-color:pink; */
+}
+.p_bottom  {
+    color:#A0A0A0;
+    font-size:36px;
+    /* text-align:center; */
+    font-weight:900;
+}
+.sp_bottom  {
+    color:#003566;
+    font-size:36px;
+    font-weight:900;
+}
+

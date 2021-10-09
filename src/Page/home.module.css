@@ -1,0 +1,61 @@
+.head  {
+    display: flex;
+    margin: 0;
+    width: 100%;
+    height: 120px;
+    background-color: #003566;
+    align-items: center;
+}
+.h1  {
+    margin:0;
+    margin-left: 40px;
+    color:#FFC300;
+    font-size: 64px;
+    font-weight:900;
+}
+.signin  {
+    margin: 0px;
+    width: 100%;
+    height: 80px;
+    margin-top: 1%;
+    /* background-color: pink; */
+
+}
+.p_signin  {
+    margin:0;
+    color:#003566;
+    font-size:64px;
+    text-align:center;
+    font-weight:900;
+    
+}
+.mid  {
+    display: flex;
+    flex-direction:row;
+    margin-top: 1%;
+    width:100%;
+    height:650px;
+    /* background-color:green; */
+
+}
+.image {
+    width: 150px;
+    height: 150px;
+    border-color: red;
+    border-width: 2px;
+    border-radius: 75px;
+
+  }
+.profileImgContainer {
+    margin-left: 8px;
+    height: 80px;
+    width: 80px;
+    border-radius: 40px;
+    /* background-color: #202020; */
+    /* text-align: center; */
+}
+.space{
+    height: 80px;
+    width: 63.5%;
+}
+
