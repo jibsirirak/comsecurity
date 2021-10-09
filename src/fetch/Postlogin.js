@@ -1,59 +1,48 @@
 import jwt_decode from "jwt-decode";
 import { Redirect, useHistory } from "react-router";
 
-export function Postlogin(email,password) {
-    // const history = useHistory();
-    // function eiei (){
-    //   history.push("/");
-    // }
-    const option = {
-        method: "POST",
-        body: JSON.stringify({
+export async function Postlogin(email,password) {
+
+  const crypto = require('crypto');
+  const hash = await crypto.createHash('sha256');
+  let option = {}
+  
+  hash.on('readable', () => {
+    const data = hash.read();
+    if (data) {
+        console.log(data.toString('hex'));
+        option = {
+          method: "POST",
+          body: JSON.stringify({
           email: email,
-          password: password,
-        }),
-        headers: { "Content-Type": "application/json" },
-      };
-    
-      fetch("http://sheepop.herokuapp.com/users/login", option)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data)
-          localStorage.setItem("access_token", data.access_token);
-          try{
-            console.log(jwt_decode(localStorage.getItem('access_token')).id)
-            return <Redirect to='/home'/>;
-            // eiei();
-          }catch(err){
-            // seterror("อีเมลล์หรือรหัสผ่านไม่ถูกต้อง")
-            // setVisible(false)
-            // document.getElementById('email').value = "";
-            // document.getElementById('password').value = "";
-            // console.log("Error")
-          }
-          
-        });
+          password:  data.toString('hex'),
+          }),
+          headers: { "Content-Type": "application/json" },
+        };
+    }
+  });
+  hash.write(password);
+  hash.end();
+  console.log("eiei",option);
+  
+  fetch("http://sheepop.herokuapp.com/users/login", option)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data)
+      localStorage.setItem("access_token", data.access_token);
+      try{
+        console.log(jwt_decode(localStorage.getItem('access_token')).id)
+        return <Redirect to='/home'/>;
+        // eiei();
+      }catch(err){
+        // seterror("อีเมลล์หรือรหัสผ่านไม่ถูกต้อง")
+        // setVisible(false)
+        // document.getElementById('email').value = "";
+        // document.getElementById('password').value = "";
+        // console.log("Error")
+      }
+    });
 } 
 
-export function postRegister(first,last,email,password) {
-    console.log(first,last,email,password)
-    const option = {
-        method: "POST",
-        body: JSON.stringify({
-          fullname:first + ' ' + last,
-          email: email,
-          password: password,
-          role:'member',
-          last_change: Date.now()
-        }),
-        headers: { "Content-Type": "application/json" },
-      };
-    
-      fetch("http://sheepop.herokuapp.com/users/register", option)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data)
-        });
-} 
-    
+
 

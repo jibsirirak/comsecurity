@@ -2,15 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './login.module.css';
 import { Icon } from '@iconify/react';
-import { Postlogin } from '../fetch/Postlogin';
+import { Postlogin } from '../fetch/postlogin';
 import {  useHistory } from "react-router-dom";
+import {Alert,AlertTitle} from '@mui/material';
 
 function Login(props) {
     const history = useHistory();
     console.log(history);
-    function eiei (email,password){
-        Postlogin(email,password).then(history.push("/home")
-      )}
+    
+    async function  eiei  (email,password){
+        await Postlogin(email,password)
+        history.push("/home")
+      }
         
     
     const [email, setEmail] = useState('');
@@ -44,6 +47,7 @@ function Login(props) {
                     onChange={event => setEmail(event.target.value)} 
                     className={styles.ip_username} />
                 </div>
+              
                 <div className={styles.password}>
                     <Icon icon="fluent:key-20-filled" style={{marginRight:10,width:40,height:40,color:'#003566'}} />
                     <p className={styles.p_password}>PASSWORD:</p>
@@ -52,6 +56,9 @@ function Login(props) {
                     <input className={styles.ip_password}
                     type="password"  
                     onChange={event => setPassword(event.target.value)} />
+                </div>
+                <div className={styles.d_alert}>
+                    <Alert severity="error">ERROR — your email or password is wrong</Alert>
                 </div>
                 <Link to='/forget' className={styles.p_forgot}>FORGOT PASSWORD?</Link>
                 <div className={styles.d_signin_btn}>

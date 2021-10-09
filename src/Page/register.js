@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './register.module.css';
-import { postRegister } from '../fetch/Postlogin';
+import { postRegister } from '../fetch/postregister';
 
 function Register(props) {
     const [first, setFirst] = useState('');
