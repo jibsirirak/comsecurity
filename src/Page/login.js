@@ -12,6 +12,8 @@ function Login(props) {
     
     async function  eiei  (email,password){
         await Postlogin(email,password)
+        setEmail('')
+        setPassword('')
         history.push("/home")
       }
         

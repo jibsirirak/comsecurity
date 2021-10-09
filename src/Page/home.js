@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './home.module.css';
+import { Link } from 'react-router-dom';
 
 function Home() {
     return (
@@ -9,7 +10,7 @@ function Home() {
             <div className={styles.space} />
             <div className={styles.profile}>
               <p className={styles.pro1}>USER01</p>
-              <p className={styles.pro2}>CHANGE PASSWORD</p>
+              <Link to='/' className={styles.pro2}>CHANGE PASSWORD</Link>
             </div>
             <div className={styles.profileImgContainer}>
               <img 

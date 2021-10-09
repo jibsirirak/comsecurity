@@ -18,7 +18,7 @@ export async function createjwt(email) {
         method: "POST",
         body: JSON.stringify({
           email: email,
-          text: "http://localhost:5000/reset/"+token,
+          text: "http://localhost:3000/reset/"+token,
         }),
         headers: { "Content-Type": "application/json" },
       };

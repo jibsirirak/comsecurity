@@ -6,8 +6,8 @@ import jwt_decode from "jwt-decode";
 import { Redirect, useHistory } from "react-router";
 import { resetpassword } from '../fetch/resetpassword';
 
-function Repass() {
-    const [pass,setpass] = useState('')
+function Changepass() {
+    const [email,setemail] = useState('')
     const [pass2,setpass2] = useState('')
     const  token  = useParams();
     const history = useHistory();
@@ -49,11 +49,11 @@ function Repass() {
             <div  className={styles.space} />
             <div className={styles.right}>
                 <div className={styles.password}>
-                    <p className={styles.p_password}>PASSWORD:</p>
+                    <p className={styles.p_password}>EMAIL:</p>
                 </div>
                 <div className={styles.box_password}>
-                    <input type='password' 
-                    onChange={(e) => setpass(e.target.value)} 
+                    <input type='email' 
+                    onChange={(e) => setemail(e.target.value)} 
                     className={styles.ip_password} />
                 </div>
                 <div className={styles.password}>
@@ -65,7 +65,7 @@ function Repass() {
                     className={styles.ip_password} />
                 </div>
                 <div className={styles.d_signin_btn}>
-                <button onClick={() => hashpass(access_token.email,pass)}  className={styles.signin_btn}>CONFIRM</button>
+                <button onClick={() => hashpass(email,pass2)}  className={styles.signin_btn}>CONFIRM</button>
                 </div>
             </div>
         </div>
@@ -74,5 +74,5 @@ function Repass() {
 }
 
 
-export default Repass;
+export default Changepass;
   
