@@ -17,7 +17,7 @@
     margin: 0px;
     width: 100%;
     height: 80px;
-    margin-top: 1%;
+    margin-top: 2%;
     /* background-color: pink; */
 
 }
@@ -42,22 +42,31 @@
     margin: 0px;
     width: 45%;
     height: 50px;
+    margin-right: 18%;
     /* background-color: red; */
+
+}
+.lastname {
+    margin: 0px;
+    width: 45%;
+    height: 50px;
+    /* margin-right: 4%; */
+    /* background-color: rgb(224, 145, 145); */
 
 }
 .p_username  {
     margin:0;
     color:#003566;
     font-size:36px;
-    text-align:center;
+    /* text-align:center; */
     font-weight:900;
     
 }
 .box_username  {
     display: flex;
-    width:70%;
-    height:120px;
-    margin-left: 5.5%;
+    width:304px;
+    height:74px;
+    margin-right: 150px;
     margin-bottom: 1%;
     justify-content: center;
     /* background-color:white; */
@@ -66,7 +75,7 @@
     margin-top:15px;
     border-radius:20px;
     background-color:#FFC300;
-    width:761px;
+    width:304px;
     height:74px;
     border-width: 0px;
     color: #000000;
@@ -84,22 +93,22 @@
     margin:0;
     color:#003566;
     font-size:36px;
-    text-align:center;
+    /* text-align:center; */
     font-weight:900;
     
 }
 .box_email  {
     display: flex;
-    width:70%;
-    height:120px;
-    margin-left: 5.5%;
+    width:761px;
+    height:74px;
+    /* margin-left: 5.5%; */
     justify-content: center;
-    margin-bottom: 1%;
+    margin-bottom: 3%;
     /* background-color:white; */
 }
 .ip_email {
     background-color:#FFC300;
-    margin-top:15px;
+    /* margin-top:15px; */
     border-radius:20px;
     width:761px;
     height:74px;
@@ -109,7 +118,7 @@
     font-weight:900;
 }
 .space  {
-    width:20%;
+    width:30%;
     height:100%;
     align-items: center;
     justify-items:center;
@@ -119,7 +128,8 @@
 .right  {
     display: flex;
     flex-direction: column;
-    width:100%;
+    /* align-items: center; */
+    width:40%;
     height:100%;
     /* background-color:rgb(29, 180, 130); */
    
@@ -136,15 +146,15 @@
     margin:0;
     color:#003566;
     font-size:36px;
-    text-align:center;
+    /* text-align:center; */
     font-weight:900;
     
 }
 .box_password  {
     display: flex;
-    width:70%;
+    width:761px;
     height:120px;
-    margin-left: 5.5%;
+    /* margin-left: 5.5%; */
     /* margin-bottom: 1%; */
     justify-content: center;
     /* background-color:rgb(230, 75, 75); */
@@ -212,4 +222,19 @@
     font-size:36px;
     font-weight:900;
 }
-
+.d_fullname{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+    /* background-color: #859bb1; */
+    /* margin-left: 15%; */
+}
+.d_ipfullname{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 110px;
+    /* margin-left: 15%; */
+    /* background-color: #4582c0; */
+}

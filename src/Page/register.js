@@ -15,12 +15,24 @@ function Register() {
         <div className={styles.mid}>
             <div  className={styles.space} />
             <div className={styles.right}>
-                <div className={styles.username}>
-                    <p className={styles.p_username}>FULLNAME:</p>
+                <div className={styles.d_fullname}> 
+                    <div className={styles.username}>
+                    <p className={styles.p_username}>FIRST NAME:</p>
+                    </div>
+                    <div className={styles.lastname}>
+                    <p className={styles.p_username}>LAST NAME:</p>
+                    </div>
+                    
                 </div>
-                <div className={styles.box_username}>
-                    <input className={styles.ip_username} />
+                <div className={styles.d_ipfullname}>
+                    <div className={styles.box_username}>
+                        <input className={styles.ip_username} />
+                    </div>
+                    <div className={styles.box_username}>
+                        <input className={styles.ip_username} />
+                    </div>
                 </div>
+                
                 <div className={styles.email}>
                     <p className={styles.p_email}>EMAIL:</p>
                 </div>
