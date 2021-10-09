@@ -1,8 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import styles from './register.module.css';
+import { postRegister } from '../fetch/Postlogin';
 
-function Register() {
+function Register(props) {
+    const [first, setFirst] = useState('');
+    const [last, setLast] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        console.log(first,last,email,password)
+        return () => {
+            
+        }
+    }, [first,last,email,password])
+
     return (
       <div>
         <div className={styles.head}>
@@ -26,10 +38,14 @@ function Register() {
                 </div>
                 <div className={styles.d_ipfullname}>
                     <div className={styles.box_username}>
-                        <input className={styles.ip_username} />
+                        <input type="email"  
+                        onChange={event => setFirst(event.target.value)} 
+                        className={styles.ip_username} />
                     </div>
                     <div className={styles.box_username}>
-                        <input className={styles.ip_username} />
+                        <input type="email"  
+                        onChange={event => setLast(event.target.value)}  
+                        className={styles.ip_username} />
                     </div>
                 </div>
                 
@@ -37,16 +53,20 @@ function Register() {
                     <p className={styles.p_email}>EMAIL:</p>
                 </div>
                 <div className={styles.box_email}>
-                    <input className={styles.ip_email} />
+                    <input type="email"  
+                    onChange={event => setEmail(event.target.value)}
+                    className={styles.ip_email} />
                 </div>
                 <div className={styles.password}>
                     <p className={styles.p_password}>PASSWORD:</p>
                 </div>
                 <div className={styles.box_password}>
-                    <input className={styles.ip_password} />
+                    <input type="email"  
+                    onChange={event => setPassword(event.target.value)}
+                    className={styles.ip_password} />
                 </div>
                 <div className={styles.d_signin_btn}>
-                    <Link to='/home' className={styles.signin_btn}>SIGN UP</Link>
+                    <button onClick={() => postRegister(first,last,email,password)} className={styles.signin_btn}>SIGN UP</button>
                 </div>
             </div>
         </div>

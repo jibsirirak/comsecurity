@@ -2,10 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './login.module.css';
 import { Icon } from '@iconify/react';
-import { Postlogin } from '../fetch';
-
+import { Postlogin } from '../fetch/Postlogin';
+import { Redirect, useHistory } from "react-router-dom";
 
 function Login(props) {
+    const history = useHistory();
+    console.log(history);
+    function eiei (email,password){
+        Postlogin(email,password).then(history.push("/home")
+      })
+        
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -48,7 +55,7 @@ function Login(props) {
                 </div>
                 <Link to='/forget' className={styles.p_forgot}>FORGOT PASSWORD?</Link>
                 <div className={styles.d_signin_btn}>
-                    <button onClick={() => Postlogin(email,password)} className={styles.signin_btn}>SIGN IN</button>
+                    <button onClick={() =>{eiei(email,password);} } className={styles.signin_btn}>SIGN IN</button>
                 </div>
             </div>
         </div>
