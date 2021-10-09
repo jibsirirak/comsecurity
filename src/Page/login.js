@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import styles from './login.module.css';
 import { Icon } from '@iconify/react';
 import { Postlogin } from '../fetch/Postlogin';
-import { Redirect, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 
 function Login(props) {
     const history = useHistory();
     console.log(history);
     function eiei (email,password){
         Postlogin(email,password).then(history.push("/home")
-      })
+      )}
         
     
     const [email, setEmail] = useState('');

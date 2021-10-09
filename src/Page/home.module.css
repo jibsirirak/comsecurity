@@ -32,20 +32,83 @@
 .mid  {
     display: flex;
     flex-direction:row;
-    margin-top: 1%;
+    /* margin-top: 1%; */
     width:100%;
-    height:650px;
+    height: 849px;
     /* background-color:green; */
 
 }
-.image {
-    width: 150px;
-    height: 150px;
-    border-color: red;
-    border-width: 2px;
-    border-radius: 75px;
+.p  {
+    /* margin:0;
+    margin-top: 10%;
+    margin-left: 700px; */
+    color:#ffffff;
+    font-size: 48px;
+    font-weight:900;
+}
+.p1  {
+    /* margin:0;
+    margin-top: 30%;
+    margin-left: 80%; */
+    color:#ffffff;
+    font-size: 48px;
+    font-weight:900;
+}
+.p2  {
+    /* margin:0;
+    margin-top: 300px;
+    margin-left: 100px; */
+    color:#ffffff;
+    font-size: 48px;
+    font-weight:900;
+}
+.p3  {
+    /* margin:0;
+    margin-top: 500px;
+    margin-left: 600px; */
+    color:#ffffff;
+    font-size: 48px;
+    font-weight:900;
+}
+.mainW {
+    margin: 0px;
+    /* margin-top: 10%; */
+    margin-left: 60%;
+    width: 100%;
+    /* background-color: red; */
+}
+.wtw {
+    margin: 0px;
+    margin-top: 20%;
+    margin-left: 10%;
+    width: 30%;
+    height: 50px;
+    /* background-color: blue; */
+}
+.wtw1 {
+    margin: 0px;
+    width: 5%;
+    margin-top: 10%;
+    margin-left: 20%;
+    height: 50px;
+    /* background-color: red; */
+}
+.wtw2 {
+    margin: 0px;
+    width: 70%;
+    margin-top: 10%;
+    height: 50px;
+    /* background-color: yellow; */
+}
+.wtw3 {
+    margin: 0px;
+    width: 45%;
+    margin-top: 10%;
+    margin-left: 10%;
+    height: 50px;
+    /* background-color: red; */
+}
 
-  }
 .profileImgContainer {
     margin-left: 8px;
     height: 80px;
@@ -56,6 +119,28 @@
 }
 .space{
     height: 80px;
-    width: 63.5%;
+    width: 45%;
+    /* background-color: #e9ddb7; */
+}
+.profile{
+    display: flex;
+    flex-direction: column;
+    color:#ffffff;
+    width: 350px;
+    height: 100px;
+    justify-content: center;
+    /* background-color: #FFC300; */
+}
+.pro1{
+    font-size: 30px;
+    font-weight:900;
+    text-align: right;
+   
+}
+.pro2{
+    font-size: 24px;
+    font-weight:900;
+    text-decoration: underline;
+    text-align: right;
 }
 
