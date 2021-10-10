@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import styles from './home.module.css';
+import styles from './product.module.css';
 import { Link } from 'react-router-dom';
 import {  useHistory } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import { Table } from 'react-bootstrap';
 
-function Home() {
+function Product() {
   const history = useHistory();
   const [fullname,setfullname] = useState('')
   function logout(){
@@ -56,26 +57,52 @@ function Home() {
                 alt="new"
               />
             </div>
-            <div className={styles.d_signin_btn}>
-                    <button onClick={() =>{ logout()}} className={styles.signin_btn} >LOGOUT</button>
+            <div className={styles.d_logout_btn}>
+                    <button onClick={() =>{ logout()}} className={styles.logout_btn} >LOGOUT</button>
             </div>
         </div>
-        <div className={styles.mid} style={{ 
-          backgroundImage: 'url("https://cdn.discordapp.com/attachments/895591558433366066/896071083705393222/istockphoto-1172944401-612x612_1.jpg")',
-          backgroundPosition: 'center',
-          backgroundSize: "120% 150%",
-          backgroundRepeat: 'no-repeat' }}>
-          <div className = {styles.mainW}>
-            <div  className= {styles.wtw}><p className={styles.p}>WELCOME</p></div>
-            <div  className= {styles.wtw1}><p className={styles.p1}>TO</p></div>
-            <div  className= {styles.wtw2}><p className={styles.p2}>ACCESS CONTROL</p></div>
-            <div  className= {styles.wtw3}><p className={styles.p3}>WEBSITE</p></div>
-          </div>  
+        <div className={styles.product}>
+            <p className={styles.p_product}>PRODUCT</p>
+        </div>
+        <div className={styles.mid}>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                    <th>#</th>
+                    <th>PRODUCT NAME</th>
+                    <th>PICTURE</th>
+                    <th>PRICE</th>
+                    <th></th>
+                    <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td><button className={styles.edit_btn}>EDIT</button></td>
+                    <td><button className={styles.delete_btn}>DELETE</button></td>
+                    </tr>
+                    <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    </tr>
+                    <tr>
+                    <td>3</td>
+                    <td colSpan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </Table>
         </div>
       </div>
     );
 }
 
 
-export default Home;
+export default Product;
   

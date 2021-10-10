@@ -5,10 +5,13 @@ import { createjwt } from '../fetch/createjwt';
 import jwt_decode from "jwt-decode";
 import { Redirect, useHistory } from "react-router";
 import { resetpassword } from '../fetch/resetpassword';
+import {Alert,AlertTitle} from '@mui/material';
 
 function Repass() {
     const [pass,setpass] = useState('')
     const [pass2,setpass2] = useState('')
+    const [error,seterror] = useState(false)
+
     const  token  = useParams();
     const history = useHistory();
     console.log(token)
@@ -36,6 +39,16 @@ function Repass() {
         hash.end();
         history.push("/home")
     }
+
+    const chackpass=()=>{
+        if(pass === pass2){
+            hashpass(access_token.email,pass)
+        }
+        else{
+            seterror(true);
+        }
+    }
+
     return (
       <div>
         <div className={styles.head}>
@@ -64,8 +77,13 @@ function Repass() {
                     onChange={(e) => setpass2(e.target.value)} 
                     className={styles.ip_password} />
                 </div>
+                <div className={styles.d_alert}>
+                    { error ?
+                    <Alert severity="error">ERROR — password is not matching</Alert> :
+                    null}
+                </div>
                 <div className={styles.d_signin_btn}>
-                <button onClick={() => hashpass(access_token.email,pass)}  className={styles.signin_btn}>CONFIRM</button>
+                <button onClick={()=> chackpass()}  className={styles.signin_btn}>CONFIRM</button>
                 </div>
             </div>
         </div>

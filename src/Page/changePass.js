@@ -5,22 +5,14 @@ import { createjwt } from '../fetch/createjwt';
 import jwt_decode from "jwt-decode";
 import { Redirect, useHistory } from "react-router";
 import { resetpassword } from '../fetch/resetpassword';
+import {Alert,AlertTitle} from '@mui/material';
 
 function Changepass() {
-    const [email,setemail] = useState('')
+    const [pass,setpass] = useState('')
     const [pass2,setpass2] = useState('')
-    const  token  = useParams();
+    const [error,seterror] = useState(false)
+
     const history = useHistory();
-    console.log(token)
-    const access_token = jwt_decode(token.token)
-    if(access_token.exp < Date.now()/ 1000 ){
-        console.log('หมดอายุ')
-        //redirect =========================>
-    }
-    else{
-        console.log('ใช้งานได้')
-    }
-   
    async function hashpass(email,pass){
         const crypto = require('crypto');
         const hash = await crypto.createHash('sha256');
@@ -36,6 +28,29 @@ function Changepass() {
         hash.end();
         history.push("/home")
     }
+
+    function chackpass(){
+        if(pass === pass2){
+            const option = {
+                method: "POST",
+                body: JSON.stringify({
+                  id:jwt_decode(localStorage.getItem('access_token')).id
+                }),
+                headers: { "Content-Type": "application/json" },
+              };
+
+            fetch("http://sheepop.herokuapp.com/users/findemail", option)
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data)
+                    console.log(jwt_decode(localStorage.getItem('access_token')));
+                    hashpass(data.email,pass)
+                });
+        }
+        else{
+            seterror(true);
+        }
+    }
     return (
       <div>
         <div className={styles.head}>
@@ -49,11 +64,11 @@ function Changepass() {
             <div  className={styles.space} />
             <div className={styles.right}>
                 <div className={styles.password}>
-                    <p className={styles.p_password}>EMAIL:</p>
+                    <p className={styles.p_password}>PASSWORD:</p>
                 </div>
                 <div className={styles.box_password}>
-                    <input type='email' 
-                    onChange={(e) => setemail(e.target.value)} 
+                    <input type='password' 
+                    onChange={(e) => setpass(e.target.value)} 
                     className={styles.ip_password} />
                 </div>
                 <div className={styles.password}>
@@ -64,8 +79,13 @@ function Changepass() {
                     onChange={(e) => setpass2(e.target.value)} 
                     className={styles.ip_password} />
                 </div>
+                <div className={styles.d_alert}>
+                    { error ?
+                    <Alert severity="error">ERROR — password is not matching</Alert> :
+                    null}
+                </div>
                 <div className={styles.d_signin_btn}>
-                <button onClick={() => hashpass(email,pass2)}  className={styles.signin_btn}>CONFIRM</button>
+                <button onClick={() => chackpass()}  className={styles.signin_btn}>CONFIRM</button>
                 </div>
             </div>
         </div>

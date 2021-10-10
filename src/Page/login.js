@@ -2,32 +2,58 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './login.module.css';
 import { Icon } from '@iconify/react';
-import { Postlogin } from '../fetch/postlogin';
+import { Postlogin } from '../fetch/Postlogin';
 import {  useHistory } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 import {Alert,AlertTitle} from '@mui/material';
 
 function Login(props) {
-    const history = useHistory();
-    console.log(history);
-    
-    async function  eiei  (email,password){
-        await Postlogin(email,password)
-        setEmail('')
-        setPassword('')
-        history.push("/home")
-      }
-        
-    
+    const history = useHistory(); 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [error,seterror] = useState(false)
     useEffect(() => {
-        console.log(email,password)
+        try {
+            if(localStorage.getItem('access_token') != ""){
+                if(jwt_decode(localStorage.getItem('access_token')).exp > Date.now()/ 1000){
+                    history.push("/home")
+                }
+            }
+        } catch(err){
+            localStorage.setItem("access_token", "");
+            }
         return () => {
-            
         }
-    }, [email,password])
-
+    }, [])
+    function  eiei  (email,password){
+        seterror(false)
+        try {
+            Postlogin(email,password).then(() => {
+                setTimeout(() => {
+                seterror(false)
+                console.log("eieieieie")
+                console.log(localStorage.getItem('access_token'))
+                if(localStorage.getItem('access_token') != ""){
+                    if(jwt_decode(localStorage.getItem('access_token')).exp > Date.now()/ 1000){
+                        history.push("/home")
+                    }
+                }
+                 }, 1000);
+            }).catch(() => {
+                setTimeout(() => {
+                    seterror(true)
+                    
+                     }, 1000);
+            })
+        }
+        catch(err){
+        }
+      }
+      useEffect(() => {
+          console.log(error)
+          return () => {
+          }
+      }, [error])
     return (
       <div>
         <div className={styles.head}>
@@ -56,21 +82,27 @@ function Login(props) {
                 </div>
                 <div className={styles.box_password}>
                     <input className={styles.ip_password}
-                    type="password"  
+                    type="password"
                     onChange={event => setPassword(event.target.value)} />
                 </div>
                 <div className={styles.d_alert}>
-                    <Alert severity="error">ERROR — your email or password is wrong</Alert>
+                    { error ?
+                    <Alert severity="error">ERROR — your email or password is wrong</Alert> :
+                    null}
                 </div>
-                <Link to='/forget' className={styles.p_forgot}>FORGOT PASSWORD?</Link>
+                <div className={styles.d_forgot}>
+                    <Link to='/forget' className={styles.p_forgot}>FORGOT PASSWORD?</Link>
+                </div>
+                
                 <div className={styles.d_signin_btn}>
                     <button onClick={() =>{eiei(email,password);} } className={styles.signin_btn}>SIGN IN</button>
                 </div>
+                
             </div>
         </div>
 
         <div className={styles.bottom}>
-            <p className={styles.p_bottom}>Don’t have an account? <span className={styles.sp_bottom}>Sign up</span>  here</p>
+            <p className={styles.p_bottom}>Don’t have an account? <Link to='/register' className={styles.sp_bottom}>Sign up</Link>  here</p>
         </div>
       </div>
     );

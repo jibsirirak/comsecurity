@@ -1,8 +1,11 @@
+
+import React, { useState, useEffect } from 'react';
+import { throws } from "assert";
 import jwt_decode from "jwt-decode";
 import { Redirect, useHistory } from "react-router";
 
 export async function Postlogin(email,password) {
-
+  // const [ans,setans] = useState(false)
   const crypto = require('crypto');
   const hash = await crypto.createHash('sha256');
   let option = {}
@@ -24,24 +27,19 @@ export async function Postlogin(email,password) {
   hash.write(password);
   hash.end();
   console.log("eiei",option);
+  const result = "";
   
-  fetch("http://sheepop.herokuapp.com/users/login", option)
+
+  
+   await fetch("http://sheepop.herokuapp.com/users/login", option)
     .then((res) => res.json())
-    .then((data) => {
+    .then(async (data) => {
       console.log(data)
-      localStorage.setItem("access_token", data.access_token);
-      try{
-        console.log(jwt_decode(localStorage.getItem('access_token')).id)
-        return <Redirect to='/home'/>;
-        // eiei();
-      }catch(err){
-        // seterror("อีเมลล์หรือรหัสผ่านไม่ถูกต้อง")
-        // setVisible(false)
-        // document.getElementById('email').value = "";
-        // document.getElementById('password').value = "";
-        // console.log("Error")
-      }
+      await localStorage.setItem("access_token", data.access_token);
+      console.log(jwt_decode(localStorage.getItem('access_token')).id)
     });
+  
+    
 } 
 
 

@@ -13,7 +13,7 @@
     font-size: 64px;
     font-weight:900;
 }
-.signin  {
+.product  {
     margin: 0px;
     width: 100%;
     height: 80px;
@@ -21,7 +21,7 @@
     /* background-color: pink; */
 
 }
-.p_signin  {
+.p_product  {
     margin:0;
     color:#003566;
     font-size:64px;
@@ -31,84 +31,15 @@
 }
 .mid  {
     display: flex;
-    flex-direction:row;
+    margin: 2%;
+    margin-left: 5%;
+    /* flex-direction:row; */
     /* margin-top: 1%; */
-    width:100%;
-    height: 849px;
+    width:90%;
+    height: 100%;
     /* background-color:green; */
 
 }
-.p  {
-    /* margin:0;
-    margin-top: 10%;
-    margin-left: 700px; */
-    color:#ffffff;
-    font-size: 48px;
-    font-weight:900;
-}
-.p1  {
-    /* margin:0;
-    margin-top: 30%;
-    margin-left: 80%; */
-    color:#ffffff;
-    font-size: 48px;
-    font-weight:900;
-}
-.p2  {
-    /* margin:0;
-    margin-top: 300px;
-    margin-left: 100px; */
-    color:#ffffff;
-    font-size: 48px;
-    font-weight:900;
-}
-.p3  {
-    /* margin:0;
-    margin-top: 500px;
-    margin-left: 600px; */
-    color:#ffffff;
-    font-size: 48px;
-    font-weight:900;
-}
-.mainW {
-    margin: 0px;
-    /* margin-top: 10%; */
-    margin-left: 60%;
-    width: 100%;
-    /* background-color: red; */
-}
-.wtw {
-    margin: 0px;
-    margin-top: 20%;
-    margin-left: 10%;
-    width: 30%;
-    height: 50px;
-    /* background-color: blue; */
-}
-.wtw1 {
-    margin: 0px;
-    width: 5%;
-    margin-top: 10%;
-    margin-left: 20%;
-    height: 50px;
-    /* background-color: red; */
-}
-.wtw2 {
-    margin: 0px;
-    width: 70%;
-    margin-top: 10%;
-    height: 50px;
-    /* background-color: yellow; */
-}
-.wtw3 {
-    margin: 0px;
-    width: 45%;
-    margin-top: 10%;
-    margin-left: 10%;
-    height: 50px;
-    /* background-color: red; */
-}
-
 .profileImgContainer {
     margin-left: 8px;
     height: 80px;
@@ -119,7 +50,7 @@
 }
 .space{
     height: 80px;
-    width: 37%;
+    width: 36.5%;
     /* background-color: #e9ddb7; */
 }
 .profile{
@@ -147,7 +78,7 @@
     margin-top: -5%;
 }
 
-.d_signin_btn  {
+.d_logout_btn  {
     display: flex;
     /* margin-top: 3%; */
     width:180px;
@@ -157,7 +88,7 @@
     justify-content: center;
     /* background-color:pink; */
 }
-.signin_btn  {
+.logout_btn  {
     display: flex;
     color: #ffffff;
     font-size:18px;
@@ -170,4 +101,32 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
+}
+.edit_btn  {
+    display: flex;
+    color: #FFCC15;
+    font-size:16px;
+    text-align:center;
+    font-weight:900;
+    background-color: #003566;
+    width:80px;
+    height:32px;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+
+}
+.delete_btn  {
+    display: flex;
+    color: #FFCC15;
+    font-size:16px;
+    text-align:center;
+    font-weight:900;
+    background-color: #DB4C4C;
+    width:90px;
+    height:32px;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+   
 }

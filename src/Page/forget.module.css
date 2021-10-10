@@ -137,4 +137,10 @@
     font-size:36px;
     font-weight:900;
 }
+.d_alert{
+    width: 760px;
+    margin-left: 16.7%;
+    margin-bottom: 1%;
+    /* background-color: #003566; */
+}
 

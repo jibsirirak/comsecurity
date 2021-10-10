@@ -133,12 +133,19 @@
     font-weight:900;
     font-size: 36px;
 }
+.d_forgot{
+    margin-left:49%;
+    width:300px;
+    height:40px;
+    /* background-color: #6b4949; */
+}
 .p_forgot  {
-    margin-left:17%;
+    /* margin-left:17%; */
     color:#003566;
     font-size:24px;
     text-align:center;
     font-weight:900;
+    /* background-color: #000000; */
 }
 
 .d_signin_btn  {
