@@ -22,7 +22,7 @@ function DashBoard(props) {
     }
 
     useEffect(() => {
-      try {
+      try{
         if(jwt_decode(localStorage.getItem('access_token')).exp < Date.now()/ 1000){
             history.push("/")
         }
@@ -30,6 +30,13 @@ function DashBoard(props) {
               history.push("/")
         }
         getFullame();
+        getLog();
+      return () => {
+        
+      }
+    }, [])
+
+    function getLog(){
         const option = {
             method: "GET",
           };
@@ -40,10 +47,7 @@ function DashBoard(props) {
             setAcc(data.data);
             
         });
-      return () => {
-        
-      }
-    }, [])
+    }
 
     function getFullame(){
         const option = {
@@ -61,43 +65,7 @@ function DashBoard(props) {
                 
             });
     }
-  
-    function getName(id){
-        let Name = '';
-        const option = {
-            method: "POST",
-            body: JSON.stringify({
-              id:id
-            }),
-            headers: { "Content-Type": "application/json" },
-          };
-        
-        return fetch("http://sheepop.herokuapp.com/users/findfullname", option)
-              .then((res) => res.json())
-              .then((data) => {
-                Name = data.fullname;
-                  
-                return Name;
-              });
-      
-    }
-  
-    function sendDelete(){
-      const option = {
-          method: "POST",
-          body: JSON.stringify({
-            id:jwt_decode(localStorage.getItem('access_token')).id
-          }),
-          headers: { "Content-Type": "application/json" },
-      };
-  
-      fetch("http://sheepop.herokuapp.com/product/delete", option)
-          .then((res) => res.json())
-          .then((data) => {
-              console.log(data)
-      });
     
-  }
 
     return (
         <div>
@@ -144,7 +112,7 @@ function DashBoard(props) {
                         <tbody key={(a._id)}>
                         <tr>
                            
-                            <td>{getName(a._id)}</td>
+                            <td>{a.owner}</td>
                             <td>{a.Date}</td>
                             <td>07:31</td>
                             <td><Badge bg="success">Update</Badge></td>
