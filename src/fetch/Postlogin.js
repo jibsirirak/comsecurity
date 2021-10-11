@@ -1,13 +1,19 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useCallback } from 'react';
 import { throws } from "assert";
 import jwt_decode from "jwt-decode";
 import { Redirect, useHistory } from "react-router";
 
-export async function Postlogin(email,password) {
+export async function Postlogin(email,password,setlock) {
   // const [ans,setans] = useState(false)
   const crypto = require('crypto');
   const hash = await crypto.createHash('sha256');
+  // useCallback(
+  //   () => {
+  //     setlock(true)
+  //   },
+  //   [setlock],
+  // )
   let option = {}
   
   hash.on('readable', () => {
@@ -31,16 +37,20 @@ export async function Postlogin(email,password) {
   
 
   
-   await fetch("http://sheepop.herokuapp.com/users/login", option)
+    await fetch("http://sheepop.herokuapp.com/users/login", option)
     .then((res) => res.json())
     .then(async (data) => {
-      console.log(data)
-      await localStorage.setItem("access_token", data.access_token);
-      console.log(jwt_decode(localStorage.getItem('access_token')).id)
-    });
-  
+      console.log("asdasdasdasd",data)
+      localStorage.setItem("access_token", data.access_token);
+      jwt_decode(localStorage.getItem('access_token'))
+      console.log("asdasdasdasdasdasdasdasd", jwt_decode(data.access_token))
+      const id =  jwt_decode(data.access_token).id
+      console.log("id : ",id)
+      
+      
+    })
     
-} 
+}
 
 
 

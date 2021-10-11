@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './login.module.css';
+import styles from './product.module.css';
 import { Icon } from '@iconify/react';
 import { Postlogin } from '../fetch/Postlogin';
 import {  useHistory } from "react-router-dom";
@@ -10,12 +10,123 @@ import { Table } from 'react-bootstrap';
 import Badge from 'react-bootstrap/Badge'
 
 function DashBoard(props) {
-   
+
+    const history = useHistory();
+    const [fullname,setfullname] = useState('');
+    const [name,setName] = useState('');
+    const [acc,setAcc] = useState([]);
+  
+    function logout(){
+      localStorage.setItem("access_token", "");
+      history.push("/")
+    }
+
+    useEffect(() => {
+      try {
+        if(jwt_decode(localStorage.getItem('access_token')).exp < Date.now()/ 1000){
+            history.push("/")
+        }
+        } catch(err){
+              history.push("/")
+        }
+        getFullame();
+        const option = {
+            method: "GET",
+          };
+        fetch("http://sheepop.herokuapp.com/data_log",option)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            setAcc(data.data);
+            
+        });
+      return () => {
+        
+      }
+    }, [])
+
+    function getFullame(){
+        const option = {
+        method: "POST",
+        body: JSON.stringify({
+            id:jwt_decode(localStorage.getItem('access_token')).id
+        }),
+        headers: { "Content-Type": "application/json" },
+        };
+    
+        fetch("http://sheepop.herokuapp.com/users/findfullname", option)
+            .then((res) => res.json())
+            .then((data) => {
+            setfullname(data.fullname);
+                
+            });
+    }
+  
+    function getName(id){
+        let Name = '';
+        const option = {
+            method: "POST",
+            body: JSON.stringify({
+              id:id
+            }),
+            headers: { "Content-Type": "application/json" },
+          };
+        
+        return fetch("http://sheepop.herokuapp.com/users/findfullname", option)
+              .then((res) => res.json())
+              .then((data) => {
+                Name = data.fullname;
+                  
+                return Name;
+              });
+      
+    }
+  
+    function sendDelete(){
+      const option = {
+          method: "POST",
+          body: JSON.stringify({
+            id:jwt_decode(localStorage.getItem('access_token')).id
+          }),
+          headers: { "Content-Type": "application/json" },
+      };
+  
+      fetch("http://sheepop.herokuapp.com/product/delete", option)
+          .then((res) => res.json())
+          .then((data) => {
+              console.log(data)
+      });
+    
+  }
+
     return (
         <div>
-            <div className={styles.head}>
-                <h1 className={styles.h1}>Computer Security</h1>
+           <div className={styles.head}>
+            <h1 className={styles.h1}>Computer Security</h1>
+            <div className={styles.space} >
+              <div>
+                <Link to='/add' className={styles.pro2}>ADD PRODUCT</Link>
+              </div>
+              <div>
+                <Link to='/dashboard' className={styles.pro2}>DASHBOARD</Link>
+              </div>
             </div>
+            <div className={styles.profile}>
+              <p className={styles.pro1}>{fullname}</p>
+              <Link to='/changepass' className={styles.pro2}>CHANGE PASSWORD</Link>
+            </div>
+            <div className={styles.profileImgContainer}>
+              <img 
+                style={{width: 80, height: 80, borderRadius: 80/ 2}} 
+                src='https://s.isanook.com/ca/0/ui/281/1405996/oatmealpopcat_234623206_147287474156656_3695665365715248797_n.jpg' 
+                resizeMode="cover" 
+                alt="new"
+              />
+            </div>
+            <div className={styles.d_logout_btn}>
+                    <button onClick={() =>{ logout()}} className={styles.logout_btn} >LOGOUT</button>
+            </div>
+        </div>
             <div className="container">
                 <h1 className="my-5" style={{fontWeight:'900'}}>All Activity</h1>
             
@@ -23,57 +134,25 @@ function DashBoard(props) {
                 <Table striped bordered hover className="my-5" style={{fontSize:'20px'}}>
                     <thead>
                         <tr>
-                            <th>No.</th>
                             <th>Name</th>
                             <th>Date</th>
                             <th>Time</th>
                             <th>Activity</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {acc.map((a) => ( 
+                        <tbody key={(a._id)}>
                         <tr>
-                            <td>1</td>
-                            <td>Aileen</td>
-                            <td>05/8/2021</td>
+                           
+                            <td>{getName(a._id)}</td>
+                            <td>{a.Date}</td>
                             <td>07:31</td>
                             <td><Badge bg="success">Update</Badge></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Aliza</td>
-                            <td>07/9/2021</td>
-                            <td>07:45</td>
                             <td><Badge bg="danger">Delete</Badge>{' '}</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Barron</td>
-                            <td>09/9/2021</td>
-                            <td>10:11</td>
                             <td><Badge bg="primary">Edit</Badge>{' '}</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Caspar</td>
-                            <td>02/11/2021</td>
-                            <td>11:31</td>
-                            <td><Badge bg="danger">Delete</Badge>{' '}</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Daniel</td>
-                            <td>10/11/2021</td>
-                            <td>13:22</td>
-                            <td><Badge bg="primary">Edit</Badge>{' '}</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Emmaline</td>
-                            <td>12/11/2021</td>
-                            <td>16:15</td>
-                            <td><Badge bg="success">Update</Badge></td>
                         </tr>
                     </tbody>
+                    ))}
                 </Table>
             </div>
         </div>

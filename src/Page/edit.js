@@ -56,7 +56,7 @@ function Edit() {
             headers: { "Content-Type": "application/json" },
         };
 
-        fetch("http://localhost:5000/product/edit/616362be6b184e4d5848ae70/", option)
+        fetch("http://sheepop.herokuapp.com/product/edit/616362be6b184e4d5848ae70/", option)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data)

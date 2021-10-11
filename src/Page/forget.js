@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './forget.module.css';
 import { createjwt } from '../fetch/createjwt';
+import {Alert,AlertTitle} from '@mui/material';
 
 function Forget() {
     const [email,setemail] = useState('')
+    const [error,seterror] = useState(false)
     useEffect(() => {
         console.log(email)
         return () => {
-            
+
         }
     }, [email])
     return (
@@ -35,9 +37,15 @@ function Forget() {
                 <div className={styles.box_password}>
                     <input className={styles.ip_password} />
                 </div> */}
-                <div className={styles.d_signin_btn}>
-                   <button onClick={() => createjwt(email)}  className={styles.signin_btn}>CONFIRM</button>
+                <div className={styles.d_alert}>
+                    { error ?
+                    <Alert variant="filled" severity="info"> Please check your email </Alert> :
+                    null}
                 </div>
+                <div className={styles.d_signin_btn}>
+                   <button onClick={() => createjwt(email)} onClick={() => seterror(true)}  className={styles.signin_btn}>CONFIRM</button>
+                </div>
+                
             </div>
         </div>
       </div>
@@ -46,4 +54,3 @@ function Forget() {
 
 
 export default Forget;
-  

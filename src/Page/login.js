@@ -12,6 +12,14 @@ function Login(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error,seterror] = useState(false)
+    const [lock,setlock] = useState(false)
+    localStorage.setItem('blockerror',"ERROR — your email or password is wrong")
+    const [errmessage,setmessage] = useState("ERROR — your email or password is wrong")
+    useEffect(() => {
+        console.log("Lock : ",lock)
+        return () => {
+        }
+    }, [lock])
     useEffect(() => {
         try {
             if(localStorage.getItem('access_token') != ""){
@@ -25,12 +33,35 @@ function Login(props) {
         return () => {
         }
     }, [])
-    function  eiei  (email,password){
+    async function   eiei  (email,password){
+        console.log("qweqweqwe")
         seterror(false)
         try {
-            Postlogin(email,password).then(() => {
+            const option = {
+                method: "POST",
+                body: JSON.stringify({
+                email : email
+                }),
+                headers: { "Content-Type": "application/json" },
+              };
+                await fetch("http://sheepop.herokuapp.com/users/getlogin",option)
+                .then((res) => res.json())
+                .then(async (data) => {
+                console.log("login check ",data.count)
+                if(data.count >= 3){
+                // localStorage.setItem('blockerror',"maxlogin")
+                localStorage.setItem('blockerror',"login kuy rai reset password now")
+                console.log("Error")
+                localStorage.setItem("access_token","");
+                console.log(localStorage.getItem('blockerror'),localStorage.getItem("access_token"))
+                setmessage(localStorage.getItem('blockerror'))
+                seterror(true)
+                throw(error)
+                }else{
+                Postlogin(email,password,setlock).then((data) => {
                 setTimeout(() => {
                 seterror(false)
+                console.log("bright : ",eiei)
                 console.log("eieieieie")
                 console.log(localStorage.getItem('access_token'))
                 if(localStorage.getItem('access_token') != ""){
@@ -38,13 +69,31 @@ function Login(props) {
                         history.push("/home")
                     }
                 }
-                 }, 1000);
+                 }, 2500);
             }).catch(() => {
+                const option = {
+                    method: "POST",
+                    body: JSON.stringify({
+                    email : email
+                    }),
+                    headers: { "Content-Type": "application/json" },
+                  };
+                     fetch("http://sheepop.herokuapp.com/users/updatelogin",option)
+                    .then((res) => res.json())
+                    .then(async (data) => {
+                    console.log("login",data)
+                })
+                setmessage(localStorage.getItem('blockerror'))
                 setTimeout(() => {
                     seterror(true)
                     
-                     }, 1000);
+                     }, 2000);
             })
+
+        }
+    });
+
+
         }
         catch(err){
         }
@@ -87,13 +136,12 @@ function Login(props) {
                 </div>
                 <div className={styles.d_alert}>
                     { error ?
-                    <Alert severity="error">ERROR — your email or password is wrong</Alert> :
+                    <Alert severity="error">{errmessage}</Alert> :
                     null}
                 </div>
                 <div className={styles.d_forgot}>
                     <Link to='/forget' className={styles.p_forgot}>FORGOT PASSWORD?</Link>
                 </div>
-                
                 <div className={styles.d_signin_btn}>
                     <button onClick={() =>{eiei(email,password);} } className={styles.signin_btn}>SIGN IN</button>
                 </div>

@@ -7,40 +7,9 @@ import { Table } from 'react-bootstrap';
 
 function Product() {
   const history = useHistory();
-  const [fullname,setfullname] = useState('')
-  const product = [
-    {
-        _id : '61636a02fe0f44750067f606',
-        name : "mamung1",
-        price : 100,
-        owner_id : '33a7d3da476a32ac237b3f603a1be62fad00299e0d4b5a8db8d913104edec629',
-        image : "",
-        detail : "asdasdasdasdasdasdasdasdasd"
-    },{
-        _id : '61636a02fe0f4475006ASDASD',
-        name : "mamung2",
-        price : 200,
-        owner_id : '33a7d3da476a32ac237b3f603a1be62fad00299e0d4b5a8db8d913104edec629',
-        image : "",
-        detail : "asdasdasdasdasdasdasdasdasd"
-    },{
-        _id : '61636a02ASDASD44750067f606',
-        name : "mamung3",
-        price : 300,
-        owner_id : '33a7d3da476a32ac237b3f603a1be62fad00299e0d4b5a8db8d913104edec629',
-        image : "",
-        detail : "asdasdasdasdasdasdasdasdasd"
-    },{
-        _id : '61636a02feASDFDG67f606',
-        name : "mamung4",
-        price : 400,
-        owner_id : '33a7d3da476a32ac237b3f603a1be62fad00299e0d4b5a8db8d913104edec629',
-        image : "",
-        detail : "asdasdasdasdasdasdasdasdasd"
-    }
+  const [fullname,setfullname] = useState('');
+  const [product,setProduct] = useState([]);
 
-
-]
   function logout(){
     localStorage.setItem("access_token", "");
     history.push("/")
@@ -50,9 +19,15 @@ function Product() {
       if(jwt_decode(localStorage.getItem('access_token')).exp < Date.now()/ 1000){
           history.push("/")
       }
-  } catch(err){
-    history.push("/")
-      }
+        } catch(err){
+            history.push("/")
+          }
+      fetch("http://sheepop.herokuapp.com/product")
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data.data);
+          
+      });
     return () => {
       
     }
@@ -73,6 +48,7 @@ function Product() {
           
       });
 
+
   function sendDelete(){
     const option = {
         method: "POST",
@@ -82,7 +58,7 @@ function Product() {
         headers: { "Content-Type": "application/json" },
     };
 
-    fetch("http://localhost:5000/product/delete", option)
+    fetch("http://sheepop.herokuapp.com/product/delete", option)
         .then((res) => res.json())
         .then((data) => {
             console.log(data)
@@ -125,7 +101,7 @@ function Product() {
           <Table striped bordered hover>
             <thead>
                 <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>PRODUCT NAME</th>
                 <th>PICTURE</th>
                 <th>PRICE</th>
@@ -134,7 +110,7 @@ function Product() {
                 </tr>
             </thead>
           {product.map((p) => ( 
-            <tbody>
+            <tbody key={(p._id)}>
                 <tr>
                 <td>{p._id}</td>
                 <td>{p.name}</td>
