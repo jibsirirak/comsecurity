@@ -7,7 +7,9 @@ import Forget from './Page/forget';
 import Repass from './Page/repass';
 import Changepass from './Page/changePass';
 import Product from './Page/product';
-import Addedit from './Page/addEdit';
+import Add from './Page/add';
+import Edit from './Page/edit';
+import Dashboard from './Page/DashBoard';
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
         <Route exact path="/forget" component={Forget} />
         <Route exact path="/changepass" component={Changepass} />
         <Route exact path="/product" component={Product} />
-        <Route exact path="/addedit" component={Addedit} />
+        <Route exact path="/add" component={Add} />
+        <Route exact path="/edit" component={Edit} />
+        <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/reset/:token"  >
           <Repass />
           </Route>

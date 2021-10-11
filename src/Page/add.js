@@ -4,9 +4,13 @@ import { Link } from 'react-router-dom';
 import {  useHistory } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
-function Addedit() {
+function Add() {
   const history = useHistory();
   const [fullname,setfullname] = useState('')
+  const [productName,setproductName] = useState('')
+  const [price,setprice] = useState('')
+  const [des,setDes] = useState('')
+
   function logout(){
     localStorage.setItem("access_token", "");
     history.push("/")
@@ -38,6 +42,30 @@ function Addedit() {
         setfullname(data.fullname);
           
       });
+    
+    function sendAdd(){
+        const option = {
+            method: "POST",
+            body: JSON.stringify({
+                "name" : productName,
+                "price" : price,
+                "owner_id" : "33a7d3da476a32ac237b3f603a1be62fad00299e0d4b5a8db8d913104edec629",
+                "image" : "",
+                "detail" : des
+            }),
+            headers: { "Content-Type": "application/json" },
+        };
+
+        fetch("http://sheepop.herokuapp.com/product/add", option)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data)
+                if(data.data === "Add product Success"){
+                     history.push("/home")
+                }
+               
+        });
+    }
 
     return (
       <div>
@@ -67,6 +95,7 @@ function Addedit() {
                     <p className={styles.p_product}>PRODUCT NAME:</p>
                     <div className={styles.box_product}>
                         <input type="text"  
+                         onChange={event => setproductName(event.target.value)} 
                         className={styles.ip_product} />
                     </div>
                 </div>
@@ -75,6 +104,7 @@ function Addedit() {
                     <p className={styles.p_price}>PRICE:</p>
                     <div className={styles.box_price}>
                         <input type="text"  
+                        onChange={event => setprice(event.target.value)} 
                         className={styles.ip_price} />
                     </div>
                 </div>
@@ -85,6 +115,7 @@ function Addedit() {
                     <p className={styles.p_Des}>DESCRIPTION:</p>
                     <div className={styles.box_Des}>
                         <textarea type="text"  
+                        onChange={event => setDes(event.target.value)} 
                         className={styles.ip_Des} />
                     </div>
                 </div>
@@ -97,7 +128,7 @@ function Addedit() {
             </div>
             <div className={styles.space4} />
             <div className={styles.d_addbtn}>
-                <button className={styles.addbtn}>ADD</button>
+                <button onClick={()=> sendAdd() } className={styles.addbtn}>ADD</button>
             </div>
         </div>
        
@@ -106,5 +137,5 @@ function Addedit() {
 }
 
 
-export default Addedit;
+export default Add;
   
